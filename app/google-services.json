@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "645304587790",
+    "firebase_url": "https://golu-online-shop.firebaseio.com",
+    "project_id": "golu-online-shop",
+    "storage_bucket": "golu-online-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645304587790:android:22d05f0d844e90daa04e5f",
+        "android_client_info": {
+          "package_name": "com.my.online_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645304587790-kq5o4jbod83a5qsg43mnuuiid7ed868t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.my.online_shop",
+            "certificate_hash": "ad73babbec23eb4f6425373ab46a4c89e9739f7a"
+          }
+        },
+        {
+          "client_id": "645304587790-8dkohc5kmvdmqebdf07aukes765jv8l9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcQ0UCzHpnssmcbjrKVn-X_pefo6899sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645304587790-8dkohc5kmvdmqebdf07aukes765jv8l9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

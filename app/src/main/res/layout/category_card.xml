@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:id="@+id/CategoryCard"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/CategoryIcon"
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_image_24"
+            android:contentDescription="@string/todo" />
+        <TextView
+            android:id="@+id/Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="5dp"
+            android:textSize="25sp"
+            android:layout_toRightOf="@id/CategoryIcon"
+            android:layout_toEndOf="@id/CategoryIcon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_alignParentBottom="true"
+            android:textSize="20sp"
+            android:text="Total Product :"
+            android:layout_toLeftOf="@id/Count"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@+id/Count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_alignParentBottom="true"
+            android:textSize="20sp"
+            android:text="0"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            tools:ignore="RelativeOverlap" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/listDivider" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/DeleteCategory"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:drawableRight="@drawable/ic_close"
+        android:layout_margin="2dp"
+        android:text="Delete"
+        android:textSize="15dp"
+        android:textColor="@color/colorText"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="#FF0000"
+        />
+</androidx.cardview.widget.CardView>

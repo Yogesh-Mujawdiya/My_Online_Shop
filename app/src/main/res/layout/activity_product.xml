@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProductActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        />
+
+    <Button
+        android:id="@+id/OrderProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/capsule_blue"
+        android:layout_gravity="center"
+        android:text="Order Now"
+        android:textColor="@color/colorText"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:paddingLeft="25dp"
+        android:layout_margin="5dp"
+        android:paddingRight="25dp"
+        />
+    <Button
+        android:id="@+id/AddProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/capsule_blue"
+        android:layout_gravity="center"
+        android:text="Add New Product"
+        android:textColor="@color/colorText"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

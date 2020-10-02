@@ -1,0 +1,45 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="#DBFFFF"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:id="@+id/OrderCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <Button
+            android:id="@+id/StatusDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/capsule_blue"
+            android:text="Delivered"
+            android:textAllCaps="false"
+            android:textColor="@color/colorText"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:textSize="25dp"
+            />
+        <Button
+            android:id="@+id/StatusCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/capsule_blue"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/colorText"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:textSize="25dp"
+            />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

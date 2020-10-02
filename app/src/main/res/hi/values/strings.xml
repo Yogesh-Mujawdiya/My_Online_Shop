@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">Rozgaar</string>
+    <string name="title_home">हाेम</string>
+    <string name="title_chat">चैट</string>
+    <string name="title_profile">खाता</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- *** ADD *** -->
+    <string name="search_title">खोजें</string>
+    <string name="search_hint">पता खोजें</string>
+    <string name="nothing_found">कुछ भी नहीं मिला</string>
+    <string name="beautician">ब्यूटिशियन</string>
+    <string name="carpenter">कारपेंटर</string>
+    <string name="electrician">इलेक्ट्रीशियन</string>
+    <string name="painter">पेंटर</string>
+    <string name="home_cleaning">काम वाली बाई</string>
+    <string name="home_tutor">हाेम ट्यूटर</string>
+    <string name="plumber">प्लम्बर</string>
+    <string name="room_rent">किराए हेतु घर</string>
+    <string name="address">पता</string>
+    <string name="help_center">सहायता केंद्र</string>
+    <string name="add_my_business">मेरा व्यवसाय जोड़ें</string>
+    <string name="my_business_review">मेरी व्यवसाय समीक्षा</string>
+    <string name="share_rojgar">रोजगार बांटे</string>
+    <string name="rate_rojgar">रेट रोजगार</string>
+    <string name="logout">लॉग आउट</string>
+
+    <string name="edit_business_profile">Edit Business Profile</string>
+
+    <string name="todo">TODO</string>
+    <string name="select_language">भाषा चुने/Select Language</string>
+    <string name="aadhar_card_no">आधार कार्ड नंबर</string>
+    <string name="get_current_location">वर्तमान स्थान</string>
+    <string name="upload_your_aadhar_card">अपना आधार कार्ड अपलोड करें</string>
+    <string name="front">सामने का</string>
+    <string name="back">पीछे का</string>
+    <string name="save">सुरक्षित करे</string>
+    <string name="hi_nice_to_meet_you">नमस्कार, आपसे मिलकर अच्छा लगा!</string>
+    <string name="see_services_around">सेवाएं देखें</string>
+    <string name="Continue">जारी रखें</string>
+    <string name="name">नाम</string>
+    <string name="total_review">समस्त रीव्यू  :</string>
+    <string name="write_review">रीव्यू लिखें</string>
+    <string name="enter_message">मैसेज लिखें</string>
+    <string name="user_name">नाम</string>
+    <string name="user_mobile">मोबाइल नंबर</string>
+    <string name="email">ईमेल</string>
+    <string name="update">अपडेट करें</string>
+    <string name="enter_your_mobile_no">अपना मोबाइल नंबर दर्ज करें</string>
+    <string name="add_a_title">शीर्षक लिखें</string>
+    <string name="sum_up_your_review_in_one_line">अपने रीव्यू को एक पंक्ति में लिखें</string>
+    <string name="head_line_for_your_review">आपके रीव्यू के लिए मुख्य लाइन</string>
+    <string name="add_a_written_review">Add a written review</string>
+    <string name="your_review_in_details">Your review in Details</string>
+    <string name="tell_us_what_you_like_or_dislike_about_this_business">हमें बताएं कि आप इस व्यवसाय के बारे में क्या पसंद करते हैं और क्या नापसंद करते हैं</string>
+    <string name="submit">सब्मिट</string>
+    <string name="english">English</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="Next_Continue">आगे बढे़ं/continue</string>
+    <string name="find_your_best">~ : Find Your Best : ~</string>
+    <string name="verify">Verify</string>
+    <string name="wait_for_the_code_we_sent_you">भेजे गए कोड की प्रतीक्षा करें</string>
+    <string name="enter_verification_code">सत्यापन कोड दर्ज करें</string>
+    <string name="search_around">आस-पास खोजें</string>
+    <string name="change_n_address">पता \n बदले</string>
+    <string name="read_more">पुरा पढ़ें</string>
+
+
+
+    <string-array name="Category_arr">
+        <item>श्रेणी चुने</item>
+        <item>ब्यूटिशियन</item>
+        <item>कारपेंटर</item>
+        <item>इलेक्ट्रीशियन</item>
+        <item>काम वाली बाई</item>
+        <item>हाेम ट्यूटर</item>
+        <item>पेंटर</item>
+        <item>प्लम्बर</item>
+        <item>किराए हेतु घर</item>
+    </string-array>
+</resources>

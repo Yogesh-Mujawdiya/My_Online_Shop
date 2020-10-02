@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Online Shop</string>
+    <string name="title_home">Home</string>
+    <string name="title_history">Orders</string>
+    <string name="title_profile">Profile</string>
+
+    <!-- *** ADD *** -->
+    <string name="help_center">Help Center</string>
+    <string name="share_us">Share Online Shop</string>
+    <string name="rate_us">Rate Online Shop</string>
+    <string name="logout">Logout</string>
+    <string name="todo">TODO</string>
+    <string name="select_language">भाषा चुने/Select Language</string>
+    <string name="save">Save</string>
+    <string name="Continue">Continue</string>
+    <string name="name">Name</string>
+    <string name="user_name">User Name</string>
+    <string name="user_mobile">User Mobile</string>
+    <string name="email">Email</string>
+    <string name="update">Update</string>
+    <string name="enter_your_mobile_no">Enter Your Mobile No</string>
+    <string name="submit">Submit</string>
+    <string name="english">English</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="Next_Continue">आगे बढे़ं/continue</string>
+    <string name="verify">Verify</string>
+    <string name="wait_for_the_code_we_sent_you">Wait for the code We sent You</string>
+    <string name="enter_verification_code">enter verification code</string>
+    <string name="search_around">Search Around</string>
+    <string name="change_n_address">Change\nAddress</string>
+    <string name="read_more">read more</string>
+
+
+    <string name="notification_activity">NotificationView</string>
+</resources>
