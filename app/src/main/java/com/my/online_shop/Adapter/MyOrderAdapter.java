@@ -1,5 +1,6 @@
 package com.my.online_shop.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -73,6 +74,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.PlaceOrd
         return new PlaceOrderViewHolder(v);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull final PlaceOrderViewHolder holder, final int position) {
         final Order currentItem = ordersList.get(position);
@@ -98,8 +100,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.PlaceOrd
                 holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (currentItem.getDeliver() != "Delivered") {
-                            mDatabase.child("deliver").setValue("Delivered");
                             final Dialog dialog = new Dialog(context);
                             dialog.setContentView(R.layout.dialog_change_status);
                             dialog.setTitle("Change Delivery Status");
@@ -107,7 +107,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.PlaceOrd
                                 @Override
                                 public void onClick(View view) {
                                     currentItem.setDeliver("Delivered");
-
+                                    mDatabase.child("deliver").setValue("Delivered");
+                                    mDatabase.child("payment").setValue("Done");
                                     currentItem.setPayment("Done");
                                     holder.textViewPayment.setText(currentItem.getPayment());
                                     holder.textViewStatus.setText(currentItem.getDeliver());
@@ -125,7 +126,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.PlaceOrd
                                 }
                             });
                             dialog.show();
-                        }
                     }
                 });
         }
