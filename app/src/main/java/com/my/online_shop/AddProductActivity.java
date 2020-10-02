@@ -108,7 +108,7 @@ public class AddProductActivity extends AppCompatActivity {
                         Toast.makeText(AddProductActivity.this, "Product Name is already Available", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
-                    else {
+                    else if(flag){
                         StorageReference riversRef = storageRef.child(product);
                         riversRef.putFile(FilePath)
                                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

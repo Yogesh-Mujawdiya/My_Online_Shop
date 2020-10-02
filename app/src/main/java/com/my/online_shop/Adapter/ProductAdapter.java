@@ -46,8 +46,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private List<Product> productsListFull;
     StoreData controller;
     Context context;
-    boolean IsAdmin = false;
     String CategoryName;
+    boolean flag;
+
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView, imageViewAddToCard;
@@ -67,7 +68,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public ProductAdapter(Context context, List<Product> list, String category) {
         this.productsList = list;
-        isAdmin();
         controller = new StoreData(context);
         CategoryName = category;
         productsListFull = new ArrayList<>(productsList);
@@ -102,7 +102,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.textViewName.setText(currentItem.getName());
         holder.textViewPrice.setText(String.format("%.2f ₹", currentItem.getPrice()));
 
-        if(IsAdmin) {
+        if(controller.isAdmin()) {
             holder.textViewDelete.setVisibility(View.VISIBLE);
             holder.textViewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,7 +114,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                             // The dialog is automatically dismissed when a dialog button is clicked.
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    FirebaseDatabase.getInstance().getReference("Category/" + CategoryName + "/" + currentItem.getName()).setValue("");
+                                    FirebaseDatabase.getInstance().getReference("Category/" + CategoryName + "/Product/" + currentItem.getName()).setValue(null);
                                     FirebaseStorage storage = FirebaseStorage.getInstance();
                                     StorageReference storageRef = storage.getReferenceFromUrl("gs://golu-online-shop.appspot.com/Product/");
                                     StorageReference photoRef = storageRef.child(currentItem.getName());
@@ -123,6 +123,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                         public void onSuccess(Void aVoid) {
                                             // File deleted successfully
                                             Toast.makeText(context, "Successfully Deleted !!", Toast.LENGTH_SHORT).show();
+                                            flag = true;
+                                            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Category/" + CategoryName);
+                                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    int count = Integer.parseInt(snapshot.child("Count").getValue().toString())-1;
+                                                    if (flag) {
+                                                        databaseReference.child("Count").setValue(count);
+                                                        flag = false;
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
                                             Log.d("Success", "onSuccess: deleted file");
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
@@ -193,23 +210,4 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     };
 
-
-    public void isAdmin(){
-        DatabaseReference mDatabase  = FirebaseDatabase.getInstance().getReference("Admin");
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    for (final DataSnapshot user : dataSnapshot.getChildren()) {
-                        if(user.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                            IsAdmin = true;
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
 }

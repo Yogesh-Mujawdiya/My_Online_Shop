@@ -47,7 +47,7 @@ public class ProfileFragment extends Fragment {
         UserEmail = root.findViewById(R.id.UserEmail);
         UserMobile = root.findViewById(R.id.UserMobile);
         Logout = root.findViewById(R.id.Logout);
-        HelpCenter = root.findViewById(R.id.HelpCenter);
+//        HelpCenter = root.findViewById(R.id.HelpCenter);
         ShareApp = root.findViewById(R.id.ShareApp);
         RateUs = root.findViewById(R.id.RateUs);
 

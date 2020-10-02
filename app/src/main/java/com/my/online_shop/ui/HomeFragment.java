@@ -31,14 +31,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.my.online_shop.Adapter.CategoryAdapter;
 import com.my.online_shop.AddCategoryActivity;
 import com.my.online_shop.Class.Category;
+import com.my.online_shop.Controller.StoreData;
 import com.my.online_shop.R;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-
-    boolean IsAdmin = false;
+    StoreData controller;
     RecyclerView recyclerView;
     private DatabaseReference mDatabase ;
     private CategoryAdapter adapter;
@@ -52,9 +52,9 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.recyclerViewCategory);
         AddCategory = root.findViewById(R.id.AddCategory);
+        controller = new StoreData(getContext());
         curr_user = FirebaseAuth.getInstance().getCurrentUser();
         setHasOptionsMenu(true); // Add this!
-        isAdmin();
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Loading...");
         progressDialog.show();
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
         AddCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(IsAdmin){
+                if(controller.isAdmin()){
                     Intent intent = new Intent(getContext(), AddCategoryActivity.class);
                     startActivity(intent);
                 }
@@ -104,28 +104,6 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
-
-    public void isAdmin(){
-        mDatabase  = FirebaseDatabase.getInstance().getReference("Admin");
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    for (final DataSnapshot user : dataSnapshot.getChildren()) {
-                        if(user.getValue().toString().equals(curr_user.getUid())){
-                            IsAdmin = true;
-                            AddCategory.setVisibility(View.VISIBLE);
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

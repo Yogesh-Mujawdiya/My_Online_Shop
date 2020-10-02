@@ -11,9 +11,18 @@ import android.os.Handler;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.my.online_shop.Controller.StoreData;
+
+import java.util.Set;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    StoreData storeData;
     private static int SPASH_TIME_OUT = 5000;
 
     private static final int UI_ANIMATION_DELAY = 300;
@@ -33,10 +42,10 @@ public class SplashScreenActivity extends AppCompatActivity {
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        storeData = new StoreData(SplashScreenActivity.this);
         setContentView(R.layout.activity_splash_screen);
         mContentView = findViewById(R.id.fullscreen_content);
 
@@ -65,6 +74,32 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }
             }, SPASH_TIME_OUT);
         }
+
+        SetAdmin();
+    }
+
+
+
+    public void SetAdmin(){
+        DatabaseReference mDatabase  = FirebaseDatabase.getInstance().getReference("Admin");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                storeData.setAdmin(false);
+                if(dataSnapshot.exists()) {
+                    for (final DataSnapshot data : dataSnapshot.getChildren()) {
+                        if(data.getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                            storeData.setAdmin(true);
+                            break;
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                storeData.setAdmin(false);
+            }
+        });
     }
 
 }

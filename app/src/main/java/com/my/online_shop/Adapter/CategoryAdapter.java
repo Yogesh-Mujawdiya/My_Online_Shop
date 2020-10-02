@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.my.online_shop.Class.Category;
+import com.my.online_shop.Controller.StoreData;
 import com.my.online_shop.ProductActivity;
 import com.my.online_shop.R;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private List<Category> categoriesList;
     private List<Category> categoriesListFull;
     Context context;
-    boolean IsAdmin = false;
+    StoreData controller;
 
     class CategoryViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
@@ -58,7 +59,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public CategoryAdapter(Context context, List<Category> list) {
         this.categoriesList = list;
-        isAdmin();
+        controller = new StoreData(context);
         categoriesListFull = new ArrayList<>(categoriesList);
         this.context = context;
     }
@@ -90,7 +91,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         });
         holder.textViewName.setText(currentItem.getName());
         holder.textViewCount.setText(Integer.toString(currentItem.getItemCount()));
-        if(IsAdmin) {
+        if(controller.isAdmin()) {
             holder.textViewDelete.setVisibility(View.VISIBLE);
             holder.textViewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,7 +104,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     FirebaseDatabase.getInstance().getReference("Category/" + currentItem.getName()).setValue(null);
-                                    FirebaseDatabase.getInstance().getReference().child("AllCategory/" + currentItem.getName()).setValue(null);
                                     FirebaseStorage storage = FirebaseStorage.getInstance();
                                     StorageReference storageRef = storage.getReferenceFromUrl("gs://golu-online-shop.appspot.com/Category/");
                                     StorageReference photoRef = storageRef.child(currentItem.getName());
@@ -180,23 +180,4 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             notifyDataSetChanged();
         }
     };
-
-    public void isAdmin(){
-        DatabaseReference mDatabase  = FirebaseDatabase.getInstance().getReference("Admin");
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    for (final DataSnapshot user : dataSnapshot.getChildren()) {
-                        if(user.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                            IsAdmin = true;
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
 }

@@ -20,6 +20,18 @@ public class StoreData {
         this.context = context;
     }
 
+    public void setAdmin(boolean admin)
+    {
+        SharedPreferences pref = context.getSharedPreferences(KEY_PREFERENCES_NAME, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("IsAdmin", admin);
+        editor.commit();
+    }
+    public boolean isAdmin()
+    {
+        SharedPreferences pref = context.getSharedPreferences(KEY_PREFERENCES_NAME, context.MODE_PRIVATE);
+        return pref.getBoolean("IsAdmin", false);
+    }
     public void addToCard(Product product)
     {
         SharedPreferences pref = context.getSharedPreferences(KEY_PREFERENCES_NAME, context.MODE_PRIVATE);

@@ -1,26 +1,16 @@
 package com.my.online_shop.ui;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,20 +18,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.my.online_shop.Adapter.CategoryAdapter;
 import com.my.online_shop.Adapter.MyOrderAdapter;
-import com.my.online_shop.Class.Category;
 import com.my.online_shop.Class.Order;
 import com.my.online_shop.Class.Product;
+import com.my.online_shop.Controller.StoreData;
 import com.my.online_shop.R;
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class HistoryFragment extends Fragment {
 
@@ -51,9 +35,7 @@ public class HistoryFragment extends Fragment {
     private MyOrderAdapter adapter;
     private List<Order> ordersList;
     private ProgressDialog progressDialog;
-
-    private boolean IsAdmin;
-
+    private StoreData controller;
     private FirebaseUser user;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,7 +43,7 @@ public class HistoryFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_history, container, false);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-
+        controller = new StoreData(getContext());
         recyclerView = root.findViewById(R.id.MyOrder);
         textViewDelivered = root.findViewById(R.id.OrderDelivered);
         textViewPending = root.findViewById(R.id.OrderPending);
@@ -71,7 +53,6 @@ public class HistoryFragment extends Fragment {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Loading...");
         progressDialog.show();
-        isAdmin();
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -115,6 +96,10 @@ public class HistoryFragment extends Fragment {
             }
         });
 
+        if(controller.isAdmin())
+            getAllOrder();
+        else
+            getOrder();
         return root;
     }
 
@@ -171,7 +156,7 @@ public class HistoryFragment extends Fragment {
                     ));
                 }
                 Collections.sort(ordersList,Order.OrderTime);
-                adapter = new MyOrderAdapter(getContext(),ordersList,IsAdmin);
+                adapter = new MyOrderAdapter(getContext(),ordersList);
                 adapter.getFilter().filter("Pending");
                 recyclerView.setAdapter(adapter);
                 progressDialog.dismiss();
@@ -215,7 +200,7 @@ public class HistoryFragment extends Fragment {
                     ));
                 }
                 Collections.sort(ordersList,Order.OrderTime);
-                adapter = new MyOrderAdapter(getContext(),ordersList, IsAdmin);
+                adapter = new MyOrderAdapter(getContext(),ordersList);
                 adapter.getFilter().filter("Pending");
                 recyclerView.setAdapter(adapter);
                 progressDialog.dismiss();
@@ -224,31 +209,6 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-    }
-
-    public void isAdmin(){
-        mDatabase  = FirebaseDatabase.getInstance().getReference("Admin");
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    for (final DataSnapshot data : dataSnapshot.getChildren()) {
-                        if(data.getValue().toString().equals(user.getUid())){
-                            IsAdmin = true;
-                            break;
-                        }
-                    }
-                    if(IsAdmin)
-                        getOrder();
-                    else
-                        getAllOrder();
-
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
             }
         });
     }

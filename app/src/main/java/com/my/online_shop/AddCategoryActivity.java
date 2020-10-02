@@ -94,7 +94,7 @@ public class AddCategoryActivity extends AppCompatActivity {
                         Toast.makeText(AddCategoryActivity.this, "Category Name is already Available", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
-                    else {
+                    else if(flag) {
                         flag = false;
                         StorageReference riversRef = storageRef.child(category);
                         riversRef.putFile(FilePath)

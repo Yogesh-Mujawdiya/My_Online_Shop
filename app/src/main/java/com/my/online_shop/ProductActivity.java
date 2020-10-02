@@ -30,6 +30,7 @@ import com.my.online_shop.Adapter.CategoryAdapter;
 import com.my.online_shop.Adapter.ProductAdapter;
 import com.my.online_shop.Class.Category;
 import com.my.online_shop.Class.Product;
+import com.my.online_shop.Controller.StoreData;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,13 +38,12 @@ import java.util.List;
 
 public class ProductActivity extends AppCompatActivity {
 
-    boolean IsAdmin;
     RecyclerView recyclerView;
     Button buttonAddProduct, OrderNow;
     private DatabaseReference mDatabase ;
     private ProductAdapter adapter;
     private List<Product> productList;
-
+    StoreData controller;
     FirebaseUser curr_user;
     String CategoryId, CategoryName;
 
@@ -55,8 +55,8 @@ public class ProductActivity extends AppCompatActivity {
         buttonAddProduct = findViewById(R.id.AddProduct);
         OrderNow = findViewById(R.id.OrderProduct);
 
+        controller = new StoreData(ProductActivity.this);
         curr_user = FirebaseAuth.getInstance().getCurrentUser();
-        isAdmin();
         Intent intent = getIntent();
         CategoryId = intent.getStringExtra("Id");
         CategoryName = intent.getStringExtra("Name");
@@ -100,7 +100,7 @@ public class ProductActivity extends AppCompatActivity {
         buttonAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(IsAdmin){
+                if(controller.isAdmin()){
                     Intent intent = new Intent(ProductActivity.this, AddProductActivity.class);
                     intent.putExtra("Category", CategoryName);
                     startActivity(intent);
@@ -115,30 +115,12 @@ public class ProductActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-    public void isAdmin(){
-        mDatabase  = FirebaseDatabase.getInstance().getReference("Admin");
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    for (final DataSnapshot user : dataSnapshot.getChildren()) {
-                        if(user.getValue().toString().equals(curr_user.getUid())){
-                            IsAdmin = true;
-                            buttonAddProduct.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    if(IsAdmin == false)
-                        buttonAddProduct.setVisibility(View.GONE);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        if(controller.isAdmin())
+            buttonAddProduct.setVisibility(View.VISIBLE);
+        else
+            buttonAddProduct.setVisibility(View.GONE);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

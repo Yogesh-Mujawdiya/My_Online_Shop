@@ -35,7 +35,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.PlaceOrd
     private List<Order> ordersListFull;
     Context context;
     StoreData controller;
-    boolean IsAdmin;
 
     class PlaceOrderViewHolder extends RecyclerView.ViewHolder {
         TextView textViewStatus, textViewPrice, textViewName, textViewMobile,
@@ -58,12 +57,11 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.PlaceOrd
         }
     }
 
-    public MyOrderAdapter(Context context, List<Order> list, boolean isAdmin) {
+    public MyOrderAdapter(Context context, List<Order> list) {
         this.ordersList = list;
         controller = new StoreData(context);
         ordersListFull = new ArrayList<>(ordersList);
         this.context = context;
-        IsAdmin = isAdmin;
     }
 
     @NonNull
@@ -95,7 +93,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.PlaceOrd
         holder.recyclerViewProducts.setLayoutManager(layoutManager);
         holder.recyclerViewProducts.setLayoutManager(new LinearLayoutManager(context));
         holder.recyclerViewProducts.setAdapter(adapter);
-        if (IsAdmin){
+        if (controller.isAdmin()){
             final DatabaseReference mDatabase  = FirebaseDatabase.getInstance().getReference("Order/"+currentItem.getId());
                 holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
