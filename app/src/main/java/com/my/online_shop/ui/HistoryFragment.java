@@ -78,13 +78,12 @@ public class HistoryFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.setAdapter(adapter);
-        adapter.getFilter().filter("Pending");
         textViewDelivered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textViewDelivered.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_on));
-                textViewPending.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_off));
-                textViewCanceled.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_off));
+                textViewDelivered.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_on));
+                textViewPending.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_off));
+                textViewCanceled.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_off));
                 textViewDelivered.setTextColor(getActivity().getResources().getColor(R.color.black));
                 textViewPending.setTextColor(getActivity().getResources().getColor(R.color.white));
                 textViewCanceled.setTextColor(getActivity().getResources().getColor(R.color.white));
@@ -94,9 +93,9 @@ public class HistoryFragment extends Fragment {
         textViewPending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textViewDelivered.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_off));
-                textViewPending.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_on));
-                textViewCanceled.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_off));
+                textViewDelivered.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_off));
+                textViewPending.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_on));
+                textViewCanceled.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_off));
                 textViewDelivered.setTextColor(getActivity().getResources().getColor(R.color.white));
                 textViewPending.setTextColor(getActivity().getResources().getColor(R.color.black));
                 textViewCanceled.setTextColor(getActivity().getResources().getColor(R.color.white));
@@ -106,9 +105,9 @@ public class HistoryFragment extends Fragment {
         textViewCanceled.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textViewDelivered.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_off));
-                textViewPending.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_off));
-                textViewCanceled.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.toggle_on));
+                textViewDelivered.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_off));
+                textViewPending.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_off));
+                textViewCanceled.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.toggle_on));
                 textViewDelivered.setTextColor(getActivity().getResources().getColor(R.color.white));
                 textViewPending.setTextColor(getActivity().getResources().getColor(R.color.white));
                 textViewCanceled.setTextColor(getActivity().getResources().getColor(R.color.black));
@@ -173,6 +172,7 @@ public class HistoryFragment extends Fragment {
                 }
                 Collections.sort(ordersList,Order.OrderTime);
                 adapter = new MyOrderAdapter(getContext(),ordersList,IsAdmin);
+                adapter.getFilter().filter("Pending");
                 recyclerView.setAdapter(adapter);
                 progressDialog.dismiss();
             }
@@ -216,6 +216,7 @@ public class HistoryFragment extends Fragment {
                 }
                 Collections.sort(ordersList,Order.OrderTime);
                 adapter = new MyOrderAdapter(getContext(),ordersList, IsAdmin);
+                adapter.getFilter().filter("Pending");
                 recyclerView.setAdapter(adapter);
                 progressDialog.dismiss();
             }
@@ -252,8 +253,4 @@ public class HistoryFragment extends Fragment {
         });
     }
 
-    private void updateList(String status){
-
-
-    }
 }

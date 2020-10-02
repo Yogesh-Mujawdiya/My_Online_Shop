@@ -58,26 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Successfull";
-                        if (!task.isSuccessful()) {
-                            msg = "Failed";
-                        }
 
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
-    private void ShowNotification(){
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "MyNotifications")
-                .setContentTitle("This is my title")
-                .setSmallIcon(R.drawable.logo)
-                .setAutoCancel(true)
-                .setContentText("This is my text");
-
-        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
-        managerCompat.notify(900, builder.build());
-    }
-
 }
